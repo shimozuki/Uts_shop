@@ -91,8 +91,12 @@
                         <td> : @currency($order->total_amount)</td>
                     </tr>
                     <tr>
+                        <td>Proof Of Transfer</td>
+                        <td> : <img src="{{url('storage/bukti_tf/'.$order->bukti_tf)}}" alt=""></td>
+                    </tr>
+                    <tr>
                         <td>Payment Method</td>
-                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
+                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Qris @endif</td>
                     </tr>
                     <tr>
                         <td>Payment Status</td>

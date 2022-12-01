@@ -19,12 +19,12 @@
   .invoice-right-top h3 {
     padding-right: 20px;
     margin-top: 20px;
-    color: green;
+    color: #fe6300;
     font-size: 30px!important;
     font-family: serif;
   }
   .invoice-left-top {
-    border-left: 4px solid green;
+    border-left: 4px #fe6300;
     padding-left: 20px;
     padding-top: 20px;
   }
@@ -35,15 +35,15 @@
     margin-bottom: 3px;
   }
   thead {
-    background: green;
+    background: #fe6300;
     color: #FFF;
   }
   .authority h5 {
     margin-top: -10px;
-    color: green;
+    color: #fe6300;
   }
   .thanks h4 {
-    color: green;
+    color: #fe6300;
     font-size: 25px;
     font-weight: normal;
     font-family: serif;
@@ -71,28 +71,28 @@
 </style>
   <div class="invoice-header">
     <div class="float-left site-logo">
-      <img src="{{asset('backend/img/logo.png')}}" alt="">
+      <img src="{{('images/uts_logo.png')}}" alt="">
     </div>
     <div class="float-right site-address">
-      <h4>{{env('APP_NAME')}}</h4>
-      <p>{{env('APP_ADDRESS')}}</p>
-      <p>Phone: <a href="tel:{{env('APP_PHONE')}}">{{env('APP_PHONE')}}</a></p>
-      <p>Email: <a href="mailto:{{env('APP_EMAIL')}}">{{env('APP_EMAIL')}}</a></p>
+      <p class="text-info">www.uts_shop.com</p>
+      <p> Jl. Raya Olat Maras, Batu Alang, Moyo Hulu</p>
+      <p>Phone: <a href="tel:{{env('APP_PHONE')}}">(0371) 2629009 </a></p>
+      <p>Email: <a href="mailto:{{env('APP_EMAIL')}}">uts_shop@gmail.com </a></p>
     </div>
     <div class="clearfix"></div>
   </div>
   <div class="invoice-description">
     <div class="invoice-left-top float-left">
       <h6>Invoice to</h6>
-       <h3>{{$order->first_name}} {{$order->last_name}}</h3>
+       <h5>{{$order->first_name}} {{$order->last_name}}</h5>
        <div class="address">
         <p>
-          <strong>Country: </strong>
-          {{$order->country}}
+          <strong>Province: </strong>
+          {{ucfirst($order->country)}}
         </p>
         <p>
           <strong>Address: </strong>
-          {{ $order->address1 }} OR {{ $order->address2}}
+          {{ $order->address1 }},{{ $order->address2}}
         </p>
          <p><strong>Phone:</strong> {{ $order->phone }}</p>
          <p><strong>Email:</strong> {{ $order->email }}</p>
@@ -129,7 +129,7 @@
               @endforeach
             </span></td>
           <td>x{{$cart->quantity}}</td>
-          <td><span>${{number_format($cart->price,2)}}</span></td>
+          <td><span>@currency($cart->price)</span></td>
         </tr>
       @endforeach
       </tbody>
@@ -159,19 +159,20 @@
           <th scope="col" class="text-right">Total:</th>
           <th>
             <span>
-                ${{number_format($order->total_amount,2)}}
+            @currency($order->total_amount)
             </span>
           </th>
         </tr>
       </tfoot>
     </table>
   </section>
-  <div class="thanks mt-3">
+  <!-- <div class="thanks mt-3">
     <h4>Thank you for your business !!</h4>
-  </div>
+  </div> -->
   <div class="authority float-right mt-5">
-    <p>-----------------------------------</p>
-    <h5>Authority Signature:</h5>
+    <p><h6>{{ucfirst($order->country)}}, {{ $order->created_at->format('d M Y') }}</h6></p>
+    <br />
+    <p>(....................................)</p>
   </div>
   <div class="clearfix"></div>
 @else

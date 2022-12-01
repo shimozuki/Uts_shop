@@ -24,7 +24,7 @@
 <!-- Start Checkout -->
 <section class="shop checkout section">
     <div class="container">
-        <form class="form" method="POST" action="{{route('cart.order')}}">
+        <form class="form" method="POST" action="{{route('cart.order')}}" enctype="multipart/form-data">
             @csrf
             <div class="row">
 
@@ -190,11 +190,19 @@
                                 <div class="checkbox">
                                     {{-- <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label> --}}
                                     <form-group>
-                                        <input name="payment_method" type="radio" value="cod"> <label> Cash On Delivery</label><br>
-                                        <input name="payment_method" type="radio" value="paypal"> <label> PayPal</label>
+                                        <input name="payment_method" id="cod" type="radio" onclick="myFunction()" value="cod"> <label> Cash On Delivery</label><br>
+                                        <input name="payment_method" id="qris" type="radio" onclick="myFunction()" value="paypal"> <label> QrRis</label>
+                                        <b>
+                                            <p class="text-center" id="text"></p>
+                                        </b>
+                                        <p id='demo'></p>
                                     </form-group>
-
+                                    <div id="upload">
+                                        <label for=""><b>Upload Bukti Pembayaran*</b></label>
+                                        <input type="file" name="bukti_tf">
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         <!--/ End Order Widget -->
@@ -348,6 +356,33 @@
         $("select.select2").select2();
     });
     $('select.nice-select').niceSelect();
+</script>
+<script>
+    var x = document.createElement("IMG");
+    x.setAttribute("src", "{{asset('images/qrcode.png')}}");
+    x.setAttribute("width", "304");
+    x.setAttribute("height", "228");
+    document.getElementById('demo').appendChild(x);
+    document.getElementById('text').innerHTML = 'Sacaand Untuk Bayar';
+    $('#demo').hide();
+    $('#text').hide();
+    $('#upload').hide();
+
+    function myFunction() {
+        var qris = document.getElementById("qris");
+        var cod = document.getElementById("cod");
+        if (qris.checked == true) {
+            $('#demo').show();
+            $('#text').show();
+            $('#upload').show();
+        }
+        if (cod.checked == true) {
+            $('#demo').hide();
+            $('#text').hide();
+            $('#upload').hide();
+        }
+
+    }
 </script>
 <script>
     function showMe(box) {
