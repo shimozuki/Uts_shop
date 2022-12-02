@@ -192,10 +192,17 @@
                                     <form-group>
                                         <input name="payment_method" id="cod" type="radio" onclick="myFunction()" value="cod"> <label> Cash On Delivery</label><br>
                                         <input name="payment_method" id="qris" type="radio" onclick="myFunction()" value="paypal"> <label> QrRis</label>
+                                        <br>
+                                        <input name="payment_method" id="tf" type="radio" onclick="myFunction()" value="paypal"> <label> Transfer Bank</label>
                                         <b>
                                             <p class="text-center" id="text"></p>
                                         </b>
                                         <p id='demo'></p>
+                                        <center><p id='BSI'></p></center>
+                                        <p class="text-center" style="color: #00a99d; font-size: 150%; margin-top: 5%;" id="rek"></p>
+                                        <b>
+                                            <p class="text-center" id="an"></p>
+                                        </b>
                                     </form-group>
                                     <div id="upload">
                                         <label for=""><b>Upload Bukti Pembayaran*</b></label>
@@ -359,27 +366,52 @@
 </script>
 <script>
     var x = document.createElement("IMG");
+    var bank = document.createElement("IMG");
     x.setAttribute("src", "{{asset('images/qrcode.png')}}");
     x.setAttribute("width", "304");
     x.setAttribute("height", "228");
     document.getElementById('demo').appendChild(x);
     document.getElementById('text').innerHTML = 'Sacaand Untuk Bayar';
+    bank.setAttribute("src", "{{asset('images/bsi_.png')}}");
+    bank.setAttribute("width", "200");
+    bank.setAttribute("height", "200");
+    document.getElementById('BSI').appendChild(bank);
+    document.getElementById('rek').innerHTML = '74180705389';
+    document.getElementById('an').innerHTML = 'A/n PT.Universitas Teknologi Sumbawa';
     $('#demo').hide();
     $('#text').hide();
     $('#upload').hide();
+    $('#BSI').hide();
+    $('#rek').hide();
+    $('#an').hide();
 
     function myFunction() {
         var qris = document.getElementById("qris");
         var cod = document.getElementById("cod");
+        var tf = document.getElementById("tf");
         if (qris.checked == true) {
             $('#demo').show();
             $('#text').show();
             $('#upload').show();
+            $('#BSI').hide();
+            $('#rek').hide();
+            $('#an').hide();
         }
         if (cod.checked == true) {
             $('#demo').hide();
             $('#text').hide();
             $('#upload').hide();
+            $('#BSI').hide();
+            $('#rek').hide();
+            $('#an').hide();
+        }
+        if (tf.checked == true) {
+            $('#demo').hide();
+            $('#text').hide();
+            $('#upload').hide();
+            $('#BSI').show();
+            $('#rek').show();
+            $('#an').show();
         }
 
     }
