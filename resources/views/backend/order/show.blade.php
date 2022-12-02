@@ -96,7 +96,7 @@
                     </tr>
                     <tr>
                         <td>Payment Method</td>
-                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Qris @endif</td>
+                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Transfer @endif</td>
                     </tr>
                     <tr>
                         <td>Payment Status</td>
